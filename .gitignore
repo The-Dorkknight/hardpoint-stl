@@ -1,0 +1,12 @@
+runtime/
+Output/
+__pycache__/
+*.pyc
+.venv/
+venv/
+*.log
+*.jks
+*.keystore
+settings.json
+.DS_Store
+Thumbs.db

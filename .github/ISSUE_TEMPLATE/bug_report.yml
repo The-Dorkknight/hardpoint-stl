@@ -1,0 +1,43 @@
+name: Bug report
+description: Something exported badly, a file didn't behave like an STL, or a plug-in broke
+body:
+  - type: markdown
+    attributes:
+      value: "Hardpoint STL is a work in progress (0.1.0-wip). Please do not attach models you are not allowed to share."
+  - type: input
+    id: version
+    attributes:
+      label: Version (python src/install.py --version)
+      placeholder: 0.1.0-wip
+    validations:
+      required: true
+  - type: input
+    id: platform
+    attributes:
+      label: Platform and program version
+      placeholder: "FreeCAD 1.0.2 on Linux Mint 22 / Fusion on Windows 11 / PrusaSlicer 2.9 on macOS 14 ..."
+    validations:
+      required: true
+  - type: dropdown
+    id: where
+    attributes:
+      label: Where did it happen?
+      options: [FreeCAD export, Fusion export, Opening the file in a slicer, hstl.py command line, Installer / start script, Documentation]
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened, and what did you expect?
+    validations:
+      required: true
+  - type: textarea
+    id: verify
+    attributes:
+      label: Output of `python src/hstl.py verify yourfile.stl` (if you have a file)
+      render: text
+  - type: textarea
+    id: log
+    attributes:
+      label: FreeCAD Report view / Fusion error text / terminal output
+      render: text

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<package format="1" xmlns="https://wiki.freecad.org/Package_Metadata">
+  <name>HardpointSTL</name>
+  <description>WORK IN PROGRESS. Export an ordinary binary STL that also remembers which triangles belong to which CAD face, what kind of surface each face is, and where the corners are. Slicers read it as a normal STL.</description>
+  <version>0.1.0</version>
+  <maintainer email="The-Dorkknight@users.noreply.github.com">Matthew Armstrong</maintainer>
+  <license>PolyForm-Noncommercial-1.0.0</license>
+  <icon>Resources/icons/hardpoint.svg</icon>
+  <content>
+    <workbench>
+      <classname>HardpointSTLWorkbench</classname>
+      <subdirectory>./</subdirectory>
+      <freecadmin>0.20</freecadmin>
+    </workbench>
+  </content>
+</package>

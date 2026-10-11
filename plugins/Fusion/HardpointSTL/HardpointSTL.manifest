@@ -1,0 +1,13 @@
+{
+	"autodeskProduct":	"Fusion",
+	"type":	"addin",
+	"id":	"0c8d6f3a-7b1e-4a52-9d84-3e5f1a6b2c70",
+	"author":	"Matthew Armstrong",
+	"description":	{
+		"":	"WORK IN PROGRESS. Export solid bodies as an ordinary binary STL that also remembers the CAD faces, surface types and corners. Slicers read it as a normal STL."
+	},
+	"version":	"0.1.0",
+	"runOnStartup":	true,
+	"supportedOS":	"windows|mac",
+	"editEnabled":	true
+}

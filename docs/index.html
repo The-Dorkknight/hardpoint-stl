@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Hardpoint STL</title>
+<meta name="description" content="An ordinary binary STL that also remembers its CAD faces, so mesh-to-CAD conversion doesn't have to guess. Work in progress. Source-available · Non-commercial.">
+<link rel="icon" href="images/favicon-64.png"><link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+<style>
+:root{--bg:#f6f7f9;--card:#fff;--ink:#1c2230;--mut:#5d6778;--acc:#2f6fed;--line:#dfe3ea}
+@media (prefers-color-scheme:dark){:root{--bg:#14171d;--card:#1d222b;--ink:#e8ebf1;--mut:#9aa4b5;--line:#2c3340}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 system-ui,sans-serif}
+.wip{background:#b7791f;color:#fff;text-align:center;font-weight:700;padding:8px 12px}
+.w{max-width:980px;margin:0 auto;padding:0 16px}
+.hero{display:flex;gap:28px;align-items:center;padding:40px 0;flex-wrap:wrap}
+.hero img.ic{width:96px;height:96px}
+.hero h1{margin:0 0 6px;font-size:40px}.hero p{color:var(--mut);margin:0 0 14px;max-width:600px}
+.btn{display:inline-block;background:var(--acc);color:#fff;text-decoration:none;padding:10px 20px;border-radius:9px;font-weight:650;margin:0 8px 8px 0}
+.btn.o{background:transparent;color:var(--acc);border:1px solid var(--acc)}
+.shot{width:100%;height:auto;border-radius:12px;border:1px solid var(--line);background:#fcfcfc}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin:26px 0}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px}.card h3{margin:0 0 6px}
+img{max-width:100%;height:auto}
+h2{margin:34px 0 10px}code{background:var(--card);border:1px solid var(--line);padding:1px 6px;border-radius:5px;overflow-wrap:anywhere}
+table{border-collapse:collapse;width:100%;display:block;overflow-x:auto}td,th{border:1px solid var(--line);padding:6px 10px;text-align:left;vertical-align:top}
+.note,figcaption{color:var(--mut);font-size:14px}
+footer{color:var(--mut);font-size:14px;padding:30px 0 50px;border-top:1px solid var(--line);margin-top:40px}
+a{color:var(--acc)}
+</style></head><body>
+<div class="wip">WORK IN PROGRESS: MANY FEATURES MAY BE BROKEN · v0.1.0-wip</div>
+<div class="w">
+<div class="hero"><img class="ic" src="images/icon-512.png" alt="">
+<div><h1>Hardpoint STL</h1><p>An ordinary binary STL that also remembers which CAD face each triangle came from, what kind of surface it is, and where the corners are. Slicers read a normal STL; a converter that knows the format can rebuild the solid without guessing.</p>
+<a class="btn" id="dl" href="https://github.com/The-Dorkknight/hardpoint-stl/releases">Download</a><a class="btn o" id="repo" href="https://github.com/The-Dorkknight/hardpoint-stl">Source on GitHub</a></div></div>
+<figure style="margin:0"><img class="shot" src="images/hardpoint-part.webp" alt="One hardpoint STL drawn three ways: the mesh, the face colours stored in the file, and the surface types with hardpoints"><figcaption>One real example file drawn three ways: the mesh a slicer sees, the face colours stored in it, and the surface types and corners.</figcaption></figure>
+<div class="grid">
+<div class="card"><h3>Still an STL</h3><p>Same triangles, same file size, same <code>.stl</code> extension. The labels sit only in the header and the 2 spare bytes after each triangle, which slicers skip.</p></div>
+<div class="card"><h3>FreeCAD and Fusion</h3><p>A workbench and an add-in that export <em>Export hardpoint STL</em> straight from your solids. A double-click installer puts them in place.</p></div>
+<div class="card"><h3>Research included</h3><p>How slicers read STL, why the format looks like this, measurements, what failed, and a list of open work, for anyone who wants to take it further.</p></div>
+</div>
+<h2>How it fits together</h2>
+<img class="shot" src="images/hardpoint-workflow.webp" alt="A CAD model becomes a hardpoint STL; a slicer reads the triangles and a converter reads the labels">
+<h2>Where the bytes go</h2>
+<img class="shot" src="images/hardpoint-layout.webp" alt="Byte layout of a binary STL with the header and the attribute bytes highlighted">
+<h2>Does it help?</h2>
+<p>Measured with STL2STEP, a separate mesh-to-STEP converter (not part of this project): fewer, more correct faces from the same triangles.</p>
+<img class="shot" src="images/hardpoint-results.webp" alt="STEP face counts for three test parts from a plain STL and from its hardpoint twin">
+<h2>What does not exist yet</h2>
+<table><tr><th>Item</th><th>Status</th></tr>
+<tr><td>FreeCAD and Fusion exporters</td><td>Written, tested only against stand-ins. Never run in the real programs.</td></tr>
+<tr><td>Real slicers</td><td>Not tried. Checked against the loaders they use, not the programs.</td></tr>
+<tr><td>A converter in this repository</td><td>No. The format is developed with STL2STEP, which is separate.</td></tr>
+<tr><td>STEP to hardpoint STL, a viewer, other CAD programs</td><td>Not written.</td></tr>
+<tr><td>Windows and macOS</td><td>Not tested.</td></tr></table>
+<h2>Install</h2>
+<ol><li>Download the zip from <a id="rel" href="https://github.com/The-Dorkknight/hardpoint-stl/releases">Releases</a> and unzip it.</li>
+<li>Double-click <code>Hardpoint-STL-Linux.sh</code>, <code>Hardpoint-STL-Mac.command</code> or <code>Hardpoint-STL-Windows.bat</code> (needs Python 3).</li>
+<li>Restart FreeCAD or Fusion and choose <em>Export hardpoint STL</em>.</li></ol>
+<p class="note">Or read the format in the repository: <a id="spec" href="https://github.com/The-Dorkknight/hardpoint-stl/blob/main/HARDPOINT_STL.md">HARDPOINT_STL.md</a> and <a id="notes" href="https://github.com/The-Dorkknight/hardpoint-stl/blob/main/DESIGN_NOTES.md">DESIGN_NOTES.md</a>.</p>
+<footer>Copyright Matthew Armstrong. <a href="https://github.com/The-Dorkknight/hardpoint-stl/blob/main/LICENSE.md" id="lic">PolyForm Noncommercial 1.0.0</a>: source-available, free for non-commercial use, <strong>provided as is with no warranty or liability</strong>. Not legal advice. Not affiliated with Autodesk, FreeCAD, Prusa Research or Bambu Lab.</footer>
+</div>
+<script>
+(function(){
+  var o="The-Dorkknight", r="hardpoint-stl", h=location.hostname, p=location.pathname.split("/").filter(Boolean);
+  if(/\.github\.io$/.test(h)){ o=h.split(".")[0]; if(p.length) r=p[0]; }
+  var base="https://github.com/"+o+"/"+r;
+  [["dl","/releases"],["rel","/releases"],["repo",""],["spec","/blob/main/HARDPOINT_STL.md"],["notes","/blob/main/DESIGN_NOTES.md"],["lic","/blob/main/LICENSE.md"]].forEach(function(x){
+    var e=document.getElementById(x[0]); if(e) e.href=base+x[1];
+  });
+})();
+</script>
+</body></html>
